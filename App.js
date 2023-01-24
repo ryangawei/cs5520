@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Header appName="Welcome to CS 5520 class" />
+      <Header appName="Welcome to CS 5520 class" style={styles.header} />
       <Button title="Add task" onPress={() => { setModalVisible(true); }}></Button>
       <StatusBar style="auto" />
       <Input textUpdateFunction={onTextEnter} modalVisible={modalVisible} onCancel={onCancel} />
@@ -37,10 +37,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  input: {
-    height: 40,
-    margin: 12,
+  header: {
+    borderColor: "purple",
     borderWidth: 1,
     padding: 10,
+    color: "purple",
+    fontSize: 20
   },
 });

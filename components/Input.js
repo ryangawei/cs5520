@@ -14,16 +14,12 @@ export default Input = ({ textUpdateFunction, modalVisible, onCancel }) => {
             require("../assets/goal.png")
             } />
         <TextInput
-          style={{
-            height: 40,
-            margin: 12,
-            borderWidth: 1,
-            padding: 10,
-          }}
+          style={styles.input}
           value={text}
           onChangeText={(text) => { 
             setText(text);
           }}
+          placeholder="Type something..."
         />
         <Button title="Confirm" onPress={ () => {textUpdateFunction(text); setText("");} } />
         <Button title="Cancel" onPress={ () => {onCancel();} } />
@@ -43,4 +39,10 @@ const styles = StyleSheet.create({
     width: 66,
     height: 58,
   },
+  input: {
+    height: 40,
+    margin: 12,
+    borderBottomWidth: 1,
+    padding: 10,
+  }
 });

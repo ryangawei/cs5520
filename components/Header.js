@@ -6,7 +6,7 @@ export default function Header(props) {
   console.log(props);
   return (
     <View>
-      <Text>{props.appName}</Text>
+      <Text style={props.style}>{props.appName}</Text>
     </View>
   )
 }
