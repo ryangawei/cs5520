@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View, Button, Modal } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, Modal, Image } from 'react-native';
 import { useState } from "react";
 
 export default Input = ({ textUpdateFunction, modalVisible, onCancel }) => {
@@ -7,6 +7,12 @@ export default Input = ({ textUpdateFunction, modalVisible, onCancel }) => {
     <Modal
       visible={modalVisible}>
       <View style={styles.container}>
+        <Image
+          style={styles.logo}
+          source={
+            // {uri: 'https://cdn-icons-png.flaticon.com/512/2617/2617812.png'}
+            require("../assets/goal.png")
+            } />
         <TextInput
           style={{
             height: 40,
@@ -32,5 +38,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
+  logo: {
+    width: 66,
+    height: 58,
+  },
 });
