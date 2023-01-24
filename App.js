@@ -6,17 +6,25 @@ import Input from './components/Input';
 
 export default function App() {
   const [enteredText, setEnteredText] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
 
+  // This function is called on Confirm
   function onTextEnter(text) {
     // console.log(text);
     setEnteredText(text);
+    setModalVisible(false);
+  }
+
+  function onCancel() {
+    setModalVisible(false);
   }
 
   return (
     <View style={styles.container}>
-      <Header appName="My header" />
+      <Header appName="Welcome to CS 5520 class" />
+      <Button title="Add task" onPress={() => { setModalVisible(true); }}></Button>
       <StatusBar style="auto" />
-      <Input textUpdateFunction={onTextEnter} />
+      <Input textUpdateFunction={onTextEnter} modalVisible={modalVisible} onCancel={onCancel} />
       <Text>{enteredText}</Text>
     </View>
   );
