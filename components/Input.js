@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
 import { useState } from "react";
 
 export default Input = ({ textUpdateFunction }) => {
@@ -14,11 +14,10 @@ export default Input = ({ textUpdateFunction }) => {
         }}
         value={text}
         onChangeText={(text) => { 
-          textUpdateFunction(text);
           setText(text);
         }}
       />
-      <Text>{text}</Text>
+      <Button title="Confirm" onPress={ () => {textUpdateFunction(text); setText("");} } />
     </View>
   )
 }

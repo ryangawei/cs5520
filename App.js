@@ -5,7 +5,6 @@ import Header from './components/Header';
 import Input from './components/Input';
 
 export default function App() {
-  const name = "CS 5520";
   const [enteredText, setEnteredText] = useState("");
 
   function onTextEnter(text) {
