@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, View, Button, Image } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, Image, SafeAreaView } from 'react-native';
 import { useState } from 'react';
 import Header from './components/Header';
 import Input from './components/Input';
@@ -20,13 +20,20 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Header appName="Welcome to CS 5520 class" style={styles.header} />
-      <Button title="Add task" onPress={() => { setModalVisible(true); }}></Button>
+    <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
+
+      <View style={styles.topContainer}>
+        <Header appName="Welcome to CS 5520 class" style={styles.header} />
+        <Button title="Add task" onPress={() => { setModalVisible(true); }}></Button>
+      </View>
+
       <Input textUpdateFunction={onTextEnter} modalVisible={modalVisible} onCancel={onCancel} />
-      <Text>{enteredText}</Text>
-    </View>
+
+      <View style={styles.bottomContainer}>
+        <Text style={styles.text}>{enteredText}</Text>
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -34,14 +41,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center',
   },
   header: {
-    borderColor: "purple",
+    borderColor: "mediumorchid",
     borderWidth: 1,
     padding: 10,
-    color: "purple",
+    color: "mediumorchid",
     fontSize: 20
   },
+  topContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  bottomContainer: {
+    flex: 4,
+    backgroundColor: "#f51251",
+    alignItems: "center"
+  },
+  text: {
+    borderRadius: 0.5
+  }
 });

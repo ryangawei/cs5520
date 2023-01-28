@@ -21,8 +21,14 @@ export default Input = ({ textUpdateFunction, modalVisible, onCancel }) => {
           }}
           placeholder="Type something..."
         />
-        <Button title="Confirm" onPress={ () => {textUpdateFunction(text); setText("");} } />
-        <Button title="Cancel" onPress={ () => {onCancel();} } />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button title="Confirm" onPress={ () => {textUpdateFunction(text); setText("");} } />
+          </View>
+          <View style={styles.button}>
+            <Button title="Cancel" onPress={ () => {onCancel();} } />
+          </View>
+        </View>
       </View>
     </Modal>
   )
@@ -44,5 +50,12 @@ const styles = StyleSheet.create({
     margin: 12,
     borderBottomWidth: 1,
     padding: 10,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+  },
+  button: {
+    width: "30%",
+    margin: 10,
   }
 });
