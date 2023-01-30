@@ -11,11 +11,12 @@ import {
 import { useState } from "react";
 import SignUpCard from "../views/SignUpCard";
 
+
 export default function StartingScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign up</Text>
-      <SignUpCard></SignUpCard>
+      <SignUpCard />
     </View>
   );
 }

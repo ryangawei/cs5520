@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import EmailInput from "../components/EmailInput";
 import PhoneInput from "../components/PhoneInput";
+import { colors } from "../colors";
 
 export default function SignUpCard() {
   const [showEmailPrompt, setShowEmailPrompt] = useState(false);
@@ -62,13 +63,13 @@ export default function SignUpCard() {
 const styles = StyleSheet.create({
   title: {
     alignItems: "center",
-    color: "#fff",
+    color: colors.title,
     fontSize: 30,
     padding: 10,
     marginBottom: 10,
   },
   inputsContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.cardBackground,
     margin: 10,
     padding: 20,
     width: 300,
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
   shadowProp:
     Platform.OS === "ios"
       ? {
-          shadowColor: "#171717",
+          shadowColor: colors.shadowColor,
           shadowOffset: { width: -2, height: 4 },
           shadowOpacity: 0.2,
           shadowRadius: 3,
