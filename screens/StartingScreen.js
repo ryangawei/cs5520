@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import SignUpCard from "../views/SignUpCard";
+import { colors } from "../colors";
 
 
 export default function StartingScreen() {
@@ -27,9 +28,11 @@ const styles = StyleSheet.create({
   },
   title: {
     alignItems: "center",
-    color: "#fff",
+    color: colors.title,
     fontSize: 30,
     padding: 10,
     marginBottom: 10,
+    borderWidth: 2,
+    borderColor: colors.titleBorder
   },
 });
