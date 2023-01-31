@@ -3,27 +3,38 @@ import { StyleSheet, Text, TextInput, View, Button, Image, SafeAreaView, Dimensi
 import { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import StartingScreen from './screens/StartingScreen';
+import ConfirmScreen from './screens/ConfirmScreen';
 import { colors } from './colors';
-let ScreenHeight = Dimensions.get("window").height;
-// let ScreenHeight = Dimensions.get("window").height;
 
 
 export default function App() {
   const [screen, setScreen] = useState("start");
 
   let bgColors;
+  let containerStyle;
+  let screenView;
   switch(screen) {
     case "start":
       bgColors = colors.startBackground;
+      containerStyle = styles.start;
+      screenView = <StartingScreen setScreen={setScreen} />;
+      console.log("Start screen")
       break;
     case "confirm":
       bgColors = colors.confirmBackground;
+      containerStyle = styles.confirm;
+      screenView = <ConfirmScreen setScreen={setScreen} />;
+      console.log("Confirm screen")
       break;
     case "finish":
       bgColors = colors.finishBackground;
+      containerStyle = styles.finish;
+      console.log("Finish screen")
       break;
     default:
       bgColors = colors.startBackground;
+      containerStyle = styles.start;
+      screenView = <StartingScreen setScreen={setScreen} />;
   }
 
   return (
@@ -31,18 +42,24 @@ export default function App() {
         // Background Linear Gradient
         colors={bgColors}
       >
-      <SafeAreaView style={styles.container}>
-        <StartingScreen />
+      <SafeAreaView style={containerStyle}>
+        {screenView}
       </SafeAreaView>
     </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   background: {
     flex: 1,
+  },
+  start: {
+    flex: 1,
+  },
+  confirm: {
+    flex: 1,
+  },
+  finish: {
+    flex: 1
   }
 });
