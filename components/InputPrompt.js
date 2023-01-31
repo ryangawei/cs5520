@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
+import { colors } from '../colors'
 
 export default function InputPrompt({ text }) {
   return (
@@ -11,7 +12,7 @@ export default function InputPrompt({ text }) {
 
 const styles = StyleSheet.create({
   inputPrompt: {
-    color: '#13005A',
+    color: colors.text,
     fontSize: 15,
   }
 })
