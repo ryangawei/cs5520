@@ -1,6 +1,7 @@
 import { View, Text, TextInput, StyleSheet } from 'react-native'
 import { useState } from 'react'
 import InputPrompt from './InputPrompt';
+import { colors } from '../colors';
 
 export default function PhoneInput({  value, onChangeText, showPrompt }) {
   return (
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   title: {
-    color: '#13005A',
+    color: colors.text,
     fontSize: 20,
   },
   input: {
