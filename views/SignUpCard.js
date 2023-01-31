@@ -13,7 +13,7 @@ import EmailInput from "../components/EmailInput";
 import PhoneInput from "../components/PhoneInput";
 import { colors } from "../colors";
 
-export default function SignUpCard() {
+export default function SignUpCard({ setScreen }) {
   const [showEmailPrompt, setShowEmailPrompt] = useState(false);
   const [showNumberPrompt, setShowPhonePrompt] = useState(false);
 
@@ -35,8 +35,16 @@ export default function SignUpCard() {
   }
 
   const onSignUp = (e) => {
-    checkEmail(email)? setShowEmailPrompt(false) : setShowEmailPrompt(true);
-    checkNumber(number)? setShowPhonePrompt(false) : setShowPhonePrompt(true);
+    const emailFlag = checkEmail(email);
+    const numberFlag = checkNumber(number);
+
+    if (emailFlag && numberFlag) {
+      setScreen("confirm");
+    }
+    else {
+      emailFlag? setShowEmailPrompt(false) : setShowEmailPrompt(true);
+      numberFlag? setShowPhonePrompt(false) : setShowPhonePrompt(true);
+    }
   }
 
   const onReset = (e) => {
@@ -51,8 +59,12 @@ export default function SignUpCard() {
     <EmailInput value={email} onChangeText={setEmail} showPrompt={showEmailPrompt} />
     <PhoneInput value={number} onChangeText={setNumber} showPrompt={showNumberPrompt} />
     <View style={styles.buttonsContainer}>
-      <Button color="red" title="Reset" onPress={onReset} />
-      <Button title="Sign up" onPress={onSignUp} />
+      <View style={styles.button}>
+        <Button style={styles.button} color="red" title="Reset" onPress={onReset} />
+      </View>
+      <View style={styles.button}>
+        <Button style={styles.button} title="Sign up" onPress={onSignUp} />
+      </View>
     </View>
 
   </View>
@@ -81,7 +93,9 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 20,
   },
-  button: {},
+  button: {
+    marginHorizontal: 25,
+  },
 
   shadowProp:
     Platform.OS === "ios"
