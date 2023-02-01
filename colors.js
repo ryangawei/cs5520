@@ -4,8 +4,8 @@ export const colors = {
   title: "#fff",
   titleBorder: "#fff",
   shadowColor: "#171717",
-  startBackground: ['#4c669f', '#3b5998', '#192f6a'],
-  confirmBackground: ['#4c669f', '#3b5998', '#192f6a'],
-  finishBackground: ['#4c669f', '#3b5998', '#192f6a'],
+  startBackground: ['#ffafcc', '#bde0fe', '#a2d2ff'],
+  confirmBackground: ['#fb8500', '#023047', '#219ebc'],
+  finishBackground: ['#dad7cd', '#588157', '#3a5a40'],
   text: "#13005A",
 }
