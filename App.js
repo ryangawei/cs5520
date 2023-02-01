@@ -19,13 +19,13 @@ export default function App() {
     case "start":
       bgColors = colors.startBackground;
       containerStyle = styles.start;
-      screenView = <StartingScreen setScreen={setScreen} setEmail={setEmail} setNumber={setNumber} />;
+      screenView = <StartingScreen setScreen={setScreen} email={email} setEmail={setEmail} number={number} setNumber={setNumber} />;
       console.log("Start screen")
       break;
     case "confirm":
       bgColors = colors.confirmBackground;
       containerStyle = styles.confirm;
-      screenView = <ConfirmScreen setScreen={setScreen} />;
+      screenView = <ConfirmScreen setScreen={setScreen} email={email} number={number}/>;
       console.log("Confirm screen")
       break;
     case "finish":

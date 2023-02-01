@@ -13,11 +13,9 @@ import EmailInput from "../components/EmailInput";
 import PhoneInput from "../components/PhoneInput";
 import { colors } from "../colors";
 
-export default function SignUpCard({ setScreen, setEmail, setNumber }) {
+export default function SignUpCard({ setScreen, email, setEmail, number, setNumber }) {
   const [showEmailPrompt, setShowEmailPrompt] = useState(false);
   const [showNumberPrompt, setShowPhonePrompt] = useState(false);
-  const [emailText, setEmailText] = useState("");
-  const [numberText, setNumberText] = useState("");
 
   function checkEmail(text) {
     if (/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(text)) {
@@ -34,8 +32,8 @@ export default function SignUpCard({ setScreen, setEmail, setNumber }) {
   }
 
   const onSignUp = (e) => {
-    const emailFlag = checkEmail(emailText);
-    const numberFlag = checkNumber(numberText);
+    const emailFlag = checkEmail(email);
+    const numberFlag = checkNumber(number);
 
     if (emailFlag && numberFlag) {
       setScreen("confirm");
@@ -55,8 +53,8 @@ export default function SignUpCard({ setScreen, setEmail, setNumber }) {
 
   return (
     <View style={[styles.inputsContainer, styles.shadowProp]}>
-    <EmailInput value={emailText} onChangeText={(text) => {setEmail(text); setEmailText(text);}} showPrompt={showEmailPrompt} />
-    <PhoneInput value={numberText} onChangeText={(text) => {setNumber(text); setNumberText(text);}} showPrompt={showNumberPrompt} />
+    <EmailInput value={email} onChangeText={(text) => {setEmail(text);}} showPrompt={showEmailPrompt} />
+    <PhoneInput value={number} onChangeText={(text) => {setNumber(text);}} showPrompt={showNumberPrompt} />
     <View style={styles.buttonsContainer}>
       <View style={styles.button}>
         <Button style={styles.button} color="red" title="Reset" onPress={onReset} />
