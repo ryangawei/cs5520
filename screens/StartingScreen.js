@@ -13,11 +13,11 @@ import SignUpCard from "../views/SignUpCard";
 import { colors } from "../colors";
 
 
-export default function StartingScreen({ setScreen }) {
+export default function StartingScreen({ setScreen, setEmail, setNumber }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign up</Text>
-      <SignUpCard setScreen={ setScreen } />
+      <SignUpCard setScreen={setScreen} setEmail={setEmail} setNumber={setNumber} />
     </View>
   );
 }

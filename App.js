@@ -9,6 +9,8 @@ import { colors } from './colors';
 
 export default function App() {
   const [screen, setScreen] = useState("start");
+  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
 
   let bgColors;
   let containerStyle;
@@ -17,7 +19,7 @@ export default function App() {
     case "start":
       bgColors = colors.startBackground;
       containerStyle = styles.start;
-      screenView = <StartingScreen setScreen={setScreen} />;
+      screenView = <StartingScreen setScreen={setScreen} setEmail={setEmail} setNumber={setNumber} />;
       console.log("Start screen")
       break;
     case "confirm":
