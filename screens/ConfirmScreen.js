@@ -8,7 +8,7 @@ import { colors } from "../colors";
 import { useState } from "react";
 import ConfirmCard from "../views/ConfirmCard";
 
-export default function ConfirmScreen({ setScreen, email, number }) {
+export default function ConfirmScreen({ setScreen, setConfirmed, email, number }) {
   const [modalVisible, setModalVisible] = useState(true);
   return (
     <Modal
@@ -19,7 +19,7 @@ export default function ConfirmScreen({ setScreen, email, number }) {
         setModalVisible(!modalVisible);
       }}>
         <View style={styles.container}>
-          <ConfirmCard setScreen={setScreen} email={email} number={number} />
+          <ConfirmCard setScreen={setScreen} setConfirmed={setConfirmed} email={email} number={number} />
         </View>
       </Modal>
   );
@@ -30,19 +30,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
+  }
 });

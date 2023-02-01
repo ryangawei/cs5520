@@ -2,7 +2,7 @@ import { View, Text, Button, StyleSheet } from 'react-native'
 import { useState } from 'react'
 import { colors } from '../colors';
 
-export default function ConfirmCard({ setScreen, email, number }) {
+export default function ConfirmCard({ setScreen, setConfirmed, email, number }) {
   return (
     <View style={[styles.container, styles.shadowProp]}>
       <Text style={styles.text}>You have entered:</Text>
@@ -12,8 +12,8 @@ export default function ConfirmCard({ setScreen, email, number }) {
       <View style={styles.buttonsContainer}>
         <View style={styles.button}>
           <Button color="red" title="Go back" onPress={() => {setScreen("start")}} />
-          <Button title="Confirm" onPress={() => {}} />
-          <Button title="Finish later" onPress={() => {}} />
+          <Button title="Confirm" onPress={() => {setScreen("finish"); setConfirmed(true);}} />
+          <Button title="Finish later" onPress={() => {setScreen("finish")}} />
 
         </View>
       </View>

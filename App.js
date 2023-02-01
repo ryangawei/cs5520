@@ -5,12 +5,21 @@ import { LinearGradient } from 'expo-linear-gradient';
 import StartingScreen from './screens/StartingScreen';
 import ConfirmScreen from './screens/ConfirmScreen';
 import { colors } from './colors';
+import FinishScreen from './screens/FinishScreen';
 
 
 export default function App() {
   const [screen, setScreen] = useState("start");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
+  const [confirmed, setConfirmed] = useState(false);
+
+  function onRestart() {
+    setEmail("");
+    setNumber("");
+    setConfirmed(false);
+    setScreen("start");
+  }
 
   let bgColors;
   let containerStyle;
@@ -25,12 +34,13 @@ export default function App() {
     case "confirm":
       bgColors = colors.confirmBackground;
       containerStyle = styles.confirm;
-      screenView = <ConfirmScreen setScreen={setScreen} email={email} number={number}/>;
+      screenView = <ConfirmScreen setScreen={setScreen} setConfirmed={setConfirmed} email={email} number={number}/>;
       console.log("Confirm screen")
       break;
     case "finish":
       bgColors = colors.finishBackground;
       containerStyle = styles.finish;
+      screenView = <FinishScreen setScreen={setScreen} confirmed={confirmed} onRestart={onRestart} email={email} number={number}/>;
       console.log("Finish screen")
       break;
     default:
