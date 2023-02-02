@@ -12,9 +12,12 @@ export default function ConfirmCard({ setScreen, setConfirmed, email, number }) 
       <View style={styles.buttonsContainer}>
         <View style={styles.button}>
           <Button color="red" title="Go back" onPress={() => {setScreen("start")}} />
+        </View>
+        <View style={styles.button}>
           <Button title="Confirm" onPress={() => {setScreen("finish"); setConfirmed(true);}} />
+        </View>
+        <View style={styles.button}>
           <Button title="Finish later" onPress={() => {setScreen("finish")}} />
-
         </View>
       </View>
     </View>
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   button: {
-    marginHorizontal: 25,
+    marginVertical: 10,
   },
   shadowProp:
     Platform.OS === "ios"

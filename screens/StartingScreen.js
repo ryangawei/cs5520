@@ -24,7 +24,8 @@ export default function StartingScreen({ setScreen, email, setEmail, number, set
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 30,
   },
   title: {
     alignItems: "center",

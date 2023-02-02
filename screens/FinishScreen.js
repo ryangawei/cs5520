@@ -13,7 +13,7 @@ export default function FinishScreen({ setScreen, confirmed, onRestart, email, n
     <View style={styles.container}>
       <FinishCard setScreen={setScreen} confirmed={confirmed} onRestart={onRestart} email={email} number={number} />
       <View style={styles.button}>
-        <Button title="Start Again" onPress={onRestart} color="white"></Button>
+        <Button title="Start Again" onPress={onRestart}></Button>
       </View>
     </View>
   );
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    marginTop: 30,
   },
   button: {
     // margin: 5,
