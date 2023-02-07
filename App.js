@@ -27,6 +27,10 @@ export default function App() {
     setGoals((prevGoals) => setGoals(prevGoals.filter(item => item.id != id)));
   }
 
+  function goalItemPressed(e, itemId) {
+    console.log(`Goal item ${itemId} pressed!`);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
@@ -45,7 +49,7 @@ export default function App() {
           renderItem={({ item }) => { 
             console.log(item); 
             return (
-              <GoalItem item={item} deleteItem={deleteItem} />
+              <GoalItem item={item} deleteItem={deleteItem} goalItemPressed={goalItemPressed}/>
             ) 
             }}>
         </FlatList>
