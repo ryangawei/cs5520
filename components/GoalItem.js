@@ -4,17 +4,20 @@ import React from 'react'
 export default function GoalItem({ item, deleteItem, goalItemPressed }) {
   
   return (
-    <Pressable
-      onPress={(e) => goalItemPressed(e, item.id)}
-      style={({pressed}) => [
-        {
-          backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white',
-        }]}>
-      <View style={styles.textContainer}>
-        <Text style={styles.text}>{item.text}</Text>
-        <Button title="X" color={"black"} onPress={(e) => { deleteItem(item.id) }}></Button>
-      </View>
-    </Pressable>
+    <View>
+      <Pressable
+        onPress={(e) => goalItemPressed(e, item.id)}
+        android_ripple={{radius: 10}}
+        style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white',
+          }]}>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>{item.text}</Text>
+            <Button title="X" color={"black"} onPress={(e) => { deleteItem(item.id) }}></Button>
+          </View>
+      </Pressable>
+    </View>
   )
 }
 
