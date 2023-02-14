@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, View, Button, Image, SafeAreaView, ScrollView, FlatList } from 'react-native';
 import { useState } from 'react';
-import Header from './components/Header';
-import Input from './components/Input';
-import GoalItem from './components/GoalItem';
+import Header from './Header';
+import Input from './Input';
+import GoalItem from './GoalItem';
 
 export default function Home() {
   const [enteredText, setEnteredText] = useState("");
