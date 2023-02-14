@@ -5,7 +5,7 @@ import Header from './Header';
 import Input from './Input';
 import GoalItem from './GoalItem';
 
-export default function Home() {
+export default function Home({ navigation }) {
   const [enteredText, setEnteredText] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [goals, setGoals] = useState([]);
@@ -27,8 +27,9 @@ export default function Home() {
     setGoals((prevGoals) => setGoals(prevGoals.filter(item => item.id != id)));
   }
 
-  function goalItemPressed(e, itemId) {
-    console.log(`Goal item ${itemId} pressed!`);
+  function goalItemPressed(e, goal) {
+    console.log(`Goal item ${goal} pressed!`);
+    navigation.navigate("GoalDetails", {"goal": goal});
   }
 
   return (
