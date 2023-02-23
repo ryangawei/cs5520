@@ -1,21 +1,45 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, View, Button, Image, SafeAreaView, ScrollView, FlatList } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { collection, onSnapshot, Snapshot } from "firebase/firestore";
 import Header from './Header';
 import Input from './Input';
 import GoalItem from './GoalItem';
+// import { firestore } from '../Firebase/firebase-setup';
+import { deleteFromDB, writeToDB } from '../Firebase/firestoreHelper';
+import { db } from "../Firebase/firebase-setup";
 
 export default function Home({ navigation }) {
   const [enteredText, setEnteredText] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [goals, setGoals] = useState([]);
 
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "goals"), (querySnapshot) => {
+      let docs = [];
+      if (querySnapshot.empty) {
+        // no data
+      } else {
+        // console.log(querySnapshot)
+        querySnapshot.docs.forEach((doc) => {
+          docs.push({ ...doc.data(), id: doc.id });
+        });
+      }
+
+      console.log(docs);
+      setGoals(docs);
+    });
+
+    return () => {unsubscribe()};
+  }, []);
+  
   // This function is called on Confirm
   function onTextEnter(text) {
     console.log(text);
     // setEnteredText(text);
     const g = { text: text, id: Math.random() };
     setGoals((prevGoals) => setGoals([...prevGoals, g]));
+    writeToDB({text: text});
     setModalVisible(false);
   }
 
@@ -24,7 +48,8 @@ export default function Home({ navigation }) {
   }
 
   function deleteItem(id) {
-    setGoals((prevGoals) => setGoals(prevGoals.filter(item => item.id != id)));
+    // setGoals((prevGoals) => setGoals(prevGoals.filter(item => item.id != id)));
+    deleteFromDB(id);
   }
 
   function goalItemPressed(e, goal) {
