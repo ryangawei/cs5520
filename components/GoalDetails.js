@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import PressableButton from "./PressableButton";
 import { AntDesign } from "@expo/vector-icons";
-
+import GoalUsers from "./GoalUsers";
 
 export default function GoalDetails({ route, navigation }) {
   useEffect(() => {
@@ -31,6 +31,7 @@ export default function GoalDetails({ route, navigation }) {
           {route.params.goal.id} - {route.params.goal.text}
         </Text>
       )}
+      <GoalUsers />
       <Button
         title="More details"
         onPress={() =>
