@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, Button } from 'react-native'
 import { useEffect, useState } from 'react'
 
 export default function GoalUsers() {
@@ -10,7 +10,7 @@ export default function GoalUsers() {
     //   .then((json) => console.log(json));
     async function getUsers() {
       try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/users')
+        const response = await fetch('https://jsonplaceholder.typicode.com/users');
         if (!response.ok) {
           throw new Error("HTTP error happend");
         }
@@ -28,6 +28,33 @@ export default function GoalUsers() {
     getUsers();
   }, [])
 
+  async function addUser() {
+    try {
+      const response = await fetch('https://jsonplaceholder.typicode.com/users', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: "WGA",
+          id: Math.random()
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("HTTP error with status", response.status);
+      }
+      const data = await response.json();
+      // console.log(data);
+      setUsers((prevUsers) => {
+        return [...prevUsers, data.name];
+      });
+
+    } catch(err) {
+      console.log("addUsers error:", err);
+    }
+  }
+
   return (
     <View>
       <FlatList
@@ -35,6 +62,7 @@ export default function GoalUsers() {
         renderItem={({item}) => {return <Text>{item}</Text>}}
         keyExtractor={item => item}
       />
+      <Button title="Add user" onPress={addUser}/>
     </View>
   )
 }

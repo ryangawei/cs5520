@@ -62,7 +62,7 @@ export default function Home({ navigation }) {
       <StatusBar style="auto" />
 
       <View style={styles.topContainer}>
-        <Header appName="Welcome to CS 5520 class" style={styles.header} />
+        <Header appName="Welcome to CS 5520 class" />
         <Button title="Add task" onPress={() => { setModalVisible(true); }}></Button>
       </View>
 
@@ -101,13 +101,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'stretch',
     justifyContent: 'center',
-  },
-  header: {
-    borderColor: "mediumorchid",
-    borderWidth: 1,
-    padding: 10,
-    color: "mediumorchid",
-    fontSize: 20
   },
   topContainer: {
     flex: 1,
