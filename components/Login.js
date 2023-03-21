@@ -29,12 +29,12 @@ export default function Login({ navigation }) {
       <Text>Email</Text>
       <TextInput 
         value={email}
-        onChange={(newValue) => { setEmail(newValue); }}
+        onChangeText={(newValue) => { setEmail(newValue); }}
       />
       <Text>Password</Text>
       <TextInput 
         value={password}
-        onChange={(newValue) => { setPassword(newValue); }}
+        onChangeText={(newValue) => { setPassword(newValue); }}
         secureTextEntry={true}
       />
 
