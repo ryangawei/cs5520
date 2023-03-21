@@ -1,13 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, View, Button, Image, SafeAreaView, ScrollView, FlatList } from 'react-native';
 import { useState, useEffect } from 'react';
-import { collection, onSnapshot, Snapshot } from "firebase/firestore";
+import { collection, onSnapshot, Snapshot, query, where } from "firebase/firestore";
 import Header from './Header';
 import Input from './Input';
 import GoalItem from './GoalItem';
 // import { firestore } from '../Firebase/firebase-setup';
 import { deleteFromDB, writeToDB } from '../Firebase/firestoreHelper';
 import { db } from "../Firebase/firebase-setup";
+import { auth } from '../Firebase/firebase-setup';
 
 export default function Home({ navigation }) {
   const [enteredText, setEnteredText] = useState("");
@@ -15,20 +16,26 @@ export default function Home({ navigation }) {
   const [goals, setGoals] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "goals"), (querySnapshot) => {
-      let docs = [];
-      if (querySnapshot.empty) {
-        // no data
-      } else {
-        // console.log(querySnapshot)
-        querySnapshot.docs.forEach((doc) => {
-          docs.push({ ...doc.data(), id: doc.id });
-        });
-      }
+    const unsubscribe = onSnapshot(
+      query(collection(db, "goals"), where("user", "==", auth.currentUser.uid)),
+      (querySnapshot) => {
+        let docs = [];
+        if (querySnapshot.empty) {
+          // no data
+        } else {
+          // console.log(querySnapshot)
+          querySnapshot.docs.forEach((doc) => {
+            docs.push({ ...doc.data(), id: doc.id });
+          });
+        }
 
-      console.log(docs);
-      setGoals(docs);
-    });
+        console.log(docs);
+        setGoals(docs);
+      },
+      (error) => {
+        console.log("onSnapshot error:", error);
+      }
+    );
 
     return () => {unsubscribe()};
   }, []);
