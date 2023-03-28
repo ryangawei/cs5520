@@ -1,11 +1,30 @@
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, Image } from "react-native";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import PressableButton from "./PressableButton";
 import { AntDesign } from "@expo/vector-icons";
 import GoalUsers from "./GoalUsers";
+import { getDownloadURL, ref } from "firebase/storage";
+import { db, auth, storage } from "../Firebase/firebase-setup";
 
 export default function GoalDetails({ route, navigation }) {
+  const [imageURL, setImageURL] = useState("");
+
+  useEffect(() => {
+    async function getImageURL() {
+      try {
+        const url = await getDownloadURL(
+          ref(storage, route.params.goal.imageUri)
+        );
+        // console.log(url);
+        setImageURL(url);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getImageURL();
+  }, []);
+
   useEffect(() => {
     navigation.setOptions({
       title: route.params.goal.text,
@@ -32,6 +51,9 @@ export default function GoalDetails({ route, navigation }) {
         </Text>
       )}
       <GoalUsers />
+      {imageURL !== "" && (
+        <Image source={{ uri: imageURL }} style={{ width: 200, height: 200 }} />
+      )}
       <Button
         title="More details"
         onPress={() =>
