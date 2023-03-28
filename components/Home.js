@@ -48,21 +48,23 @@ export default function Home({ navigation }) {
     const imageName = uri.substring(uri.lastIndexOf('/') + 1); 
     const imageRef = await ref(storage, `images/${imageName}`);
     const uploadResult = await uploadBytesResumable(imageRef, blob);
-    // console.log(uploadResult);
+
+    return uploadResult.metadata.fullPath;
   }
   
   // This function is called on Confirm
-  function onTextEnter(dataFromInput) {
-    const text = dataFromInput.text
-    const imageUri = dataFromInput.imageUri;
-    if (imageUri) {
-      fetchImageData(imageUri);
+  async function onTextEnter(dataFromInput) {
+    let g = { text: dataFromInput.text };
+
+    let imageUri = dataFromInput.imageUri;
+    if (dataFromInput.imageUri) {
+      imageUri = await fetchImageData(imageUri);
+      g = { ...g, imageUri: imageUri };
     }
-    console.log(text);
+    // console.log(text);
     // setEnteredText(text);
-    const g = { text: text, id: Math.random() };
     setGoals((prevGoals) => setGoals([...prevGoals, g]));
-    writeToDB({text: text, imageUri: imageUri});
+    writeToDB(g);
     setModalVisible(false);
   }
 
