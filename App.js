@@ -37,7 +37,7 @@ const AppStack = <>
           headerRight: () => {
             return (
               <FontAwesome
-                name="profile"
+                name="info"
                 size={24}
                 color="#eee"
                 onPress={() => navigation.navigate("Profile")}
@@ -55,7 +55,7 @@ const AppStack = <>
         headerRight: () => {
           return (
             <FontAwesome
-              name="logout"
+              name="sign-out"
               size={24}
               color="#eee"
               onPress={() => {
