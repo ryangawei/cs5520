@@ -1,8 +1,14 @@
 import { StyleSheet, Text, TextInput, View, Button, Modal, Image } from 'react-native';
 import { useState } from "react";
+import ImageManager from './ImageManager';
 
 export default Input = ({ textUpdateFunction, modalVisible, onCancel }) => {
   const [text, setText] = useState("");
+  const [imageUri, setImageUri] = useState("");
+
+  function imageUriHandler(imageUri) {
+    setImageUri(imageUri);
+  }
   return (
     <Modal
       visible={modalVisible}>
@@ -21,9 +27,10 @@ export default Input = ({ textUpdateFunction, modalVisible, onCancel }) => {
           }}
           placeholder="Type something..."
         />
+        <ImageManager imageUriHandler={imageUriHandler} />
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
-            <Button title="Confirm" onPress={ () => {textUpdateFunction(text); setText("");} } />
+            <Button title="Confirm" onPress={ () => {textUpdateFunction({"text": text, "imageUri": imageUri}); setText("");} } />
           </View>
           <View style={styles.button}>
             <Button title="Cancel" onPress={ () => {onCancel();} } />

@@ -7,8 +7,8 @@ import Input from './Input';
 import GoalItem from './GoalItem';
 // import { firestore } from '../Firebase/firebase-setup';
 import { deleteFromDB, writeToDB } from '../Firebase/firestoreHelper';
-import { db } from "../Firebase/firebase-setup";
-import { auth } from '../Firebase/firebase-setup';
+import { db, auth, storage } from "../Firebase/firebase-setup";
+import { ref, uploadBytesResumable } from "firebase/storage";
 
 export default function Home({ navigation }) {
   const [enteredText, setEnteredText] = useState("");
@@ -39,14 +39,30 @@ export default function Home({ navigation }) {
 
     return () => {unsubscribe()};
   }, []);
+
+  async function fetchImageData(uri) {
+    // console.log(uri);
+    const response = await fetch(uri);
+    const blob = await response.blob();
+
+    const imageName = uri.substring(uri.lastIndexOf('/') + 1); 
+    const imageRef = await ref(storage, `images/${imageName}`);
+    const uploadResult = await uploadBytesResumable(imageRef, blob);
+    // console.log(uploadResult);
+  }
   
   // This function is called on Confirm
-  function onTextEnter(text) {
+  function onTextEnter(dataFromInput) {
+    const text = dataFromInput.text
+    const imageUri = dataFromInput.imageUri;
+    if (imageUri) {
+      fetchImageData(imageUri);
+    }
     console.log(text);
     // setEnteredText(text);
     const g = { text: text, id: Math.random() };
     setGoals((prevGoals) => setGoals([...prevGoals, g]));
-    writeToDB({text: text});
+    writeToDB({text: text, imageUri: imageUri});
     setModalVisible(false);
   }
 

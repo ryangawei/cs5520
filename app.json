@@ -4,5 +4,14 @@
     "name": "awesomeproject",
     "sdkVersion": "47.0.0"
   },
-  "name": "awesomeproject"
+  "name": "awesomeproject",
+  "plugins": [ 
+    [
+    "expo-image-picker", {
+    "cameraPermission": "$(PRODUCT_NAME) needs access to your camera.",
+    "photosPermission": "$(PRODUCT_NAME) needs access to your photos.",
+    "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone"
+    } 
+  ]  
+  ] 
 }
