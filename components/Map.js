@@ -4,7 +4,9 @@ import MapView, { Marker } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Map() {
+export default function Map({ route }) {
+  const currentLocation = route.params? route.params.currentLocation : null;
+  // console.log(route.params);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const navigation = useNavigation();
 
@@ -16,8 +18,8 @@ export default function Map() {
         }}
         style={styles.container}
         initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
+          latitude: currentLocation.latitude,
+          longitude: currentLocation.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}

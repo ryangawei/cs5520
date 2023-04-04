@@ -1,5 +1,32 @@
-import { doc, collection, addDoc, deleteDoc } from "firebase/firestore"; 
+import { doc, collection, addDoc, deleteDoc, setDoc, getDoc } from "firebase/firestore"; 
 import { db, auth } from "./firebase-setup";
+
+export async function getUserLocation() {
+  try {
+    const docRef = doc(db, "users", auth.currentUser.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("User location:", docSnap.data());
+      return docSnap.data();
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No user location found!");
+      return null;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function saveUserLocation(location) {
+  try {
+    await setDoc(doc(db, "users", auth.currentUser.uid), location);
+  } catch (err) {
+    console.log(err);
+  }
+
+}
 
 export async function writeToDB(doc) {
   try {
