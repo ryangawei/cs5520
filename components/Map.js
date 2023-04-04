@@ -28,16 +28,15 @@ export default function Map() {
           </>
         )}
       </MapView>
-      {selectedLocation && (
-        <Button
-          title="Confirm selected location"
-          onPress={() =>
-            navigation.navigate("Profile", {
-              selectedLocation: selectedLocation,
-            })
-          }
-        />
-      )}
+      <Button
+        disabled={!selectedLocation}
+        title="Confirm selected location"
+        onPress={() =>
+          navigation.navigate("Profile", {
+            selectedLocation: selectedLocation,
+          })
+        }
+      />
     </>
   );
 }
