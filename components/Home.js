@@ -9,6 +9,8 @@ import GoalItem from './GoalItem';
 import { deleteFromDB, writeToDB } from '../Firebase/firestoreHelper';
 import { db, auth, storage } from "../Firebase/firebase-setup";
 import { ref, uploadBytesResumable } from "firebase/storage";
+import * as Notifications from "expo-notifications";
+import { verifyPermissions } from './NotificationManager';
 
 export default function Home({ navigation }) {
   const [enteredText, setEnteredText] = useState("");
@@ -16,6 +18,24 @@ export default function Home({ navigation }) {
   const [goals, setGoals] = useState([]);
 
   useEffect(() => {
+    async function getToken() {
+      try {
+        const hasPermission = await verifyPermissions();
+        if (!hasPermission) {
+          return; // return early if no permission
+        }
+
+        const token = await Notifications.getExpoPushTokenAsync();
+        console.log("Expo push token:", token);
+        return token;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getToken();
+
+
     const unsubscribe = onSnapshot(
       query(collection(db, "goals"), where("user", "==", auth.currentUser.uid)),
       (querySnapshot) => {
