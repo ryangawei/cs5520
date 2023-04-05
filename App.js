@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   ScrollView,
   FlatList,
+  Linking
 } from "react-native";
 import { useState, useEffect } from "react";
 import Home from "./components/Home";
@@ -20,6 +21,19 @@ import { auth } from "./Firebase/firebase-setup";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
+import Map from "./components/Map";
+import * as Notifications from "expo-notifications";
+
+// Decide whether to show the notification to user
+Notifications.setNotificationHandler({
+  handleNotification: async () => {
+    return {
+      shouldPlaySound: true,
+      shouldSetBadge: true,
+      shouldShowAlert: true,
+    };
+  },
+});
 
 const Stack = createNativeStackNavigator();
 
@@ -48,6 +62,7 @@ const AppStack = <>
       }}
       name="Home" component={Home} />
     <Stack.Screen name="GoalDetails" component={GoalDetails} />
+    <Stack.Screen name="Map" component={Map} />
     <Stack.Screen
       name="Profile"
       component={Profile}
@@ -71,6 +86,26 @@ const AppStack = <>
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    // Handle every notification that is received while the app is open
+    const subscription = Notifications.addNotificationReceivedListener(
+      (notification) => {
+        console.log("Received notification", notification);
+      }
+    );
+
+    // Handle every notification that is tapped on while the app is open
+    const responseListener = Notifications.addNotificationResponseReceivedListener(
+      (response) => {
+        console.log("Interacted notification", response.notification);
+        Linking.openURL(response.notification.request.content.data.url);
+      }
+    );
+
+
+    return () => {subscription.remove(); responseListener.remove()};
+  }, []);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
